@@ -41,8 +41,15 @@ const connect = async () => {
   log("accounts found " + JSON.stringify(accounts));
   log("calling eth_requestAccounts...");
 
-  log("trust wallet testing, isTrust" + (window as any).ethereum.isTrust);
-  log("trust wallet testing, provider request function " + (window as any).ethereum.request);
+  log("trust wallet testing, isTrust: " + (window as any).ethereum.isTrust);
+  log("trust wallet testing, provider request promise " + (window as any).ethereum.request({ method: "eth_requestAccounts" }) );
+  
+  myProvider.request({ method: "eth_requestAccounts" }).then((result: any) => {
+    log("eth_requestAccounts promise result " + JSON.stringify(result));
+  }).catch((error: any) => {
+    log("eth_requestAccounts promise error " + JSON.stringify(error));
+  });
+
   try {
     await myProvider.request({ method: "eth_requestAccounts" });
   } catch (error) {
