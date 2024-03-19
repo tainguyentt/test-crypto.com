@@ -40,6 +40,9 @@ const connect = async () => {
   const accounts = await myProvider.request({ method: "eth_accounts" });
   log("accounts found " + JSON.stringify(accounts));
   log("calling eth_requestAccounts...");
+
+  log("trust wallet testing, isTrust" + (window as any).ethereum.isTrust);
+  log("trust wallet testing, provider request function " + (window as any).ethereum.request);
   try {
     await myProvider.request({ method: "eth_requestAccounts" });
   } catch (error) {
